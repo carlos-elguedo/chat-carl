@@ -1,0 +1,6 @@
+no se demore tant al cargar al tener los imoticones
+
+escitura de los emoticones en el area de texto
+
+como saber que la funcion ajax se ha ejecutado correctamente
+

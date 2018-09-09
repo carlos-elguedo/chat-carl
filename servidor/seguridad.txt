@@ -1,0 +1,21 @@
+1620lovemy1620
+--aXzhQ4eWTM3atbct
+---SbmP6u4mJw3QBqRw usuariomylove
+
+	1. El usuario que se use no debe ser root, esto para que no pueda borrar 
+	y hacer cosas mas alla de lo permitido
+	
+	2. La conexion se debe establecer y luego cerrarse
+
+	3. No implementar toda la logica del negocio en los archivos php
+	usar disparadores, vistas y funciones para evitar manipulaciones
+	
+	4. Establecer las conexiones SSL para cliente-servidor. Esto evita que puedan
+	monitoriar el trafico facilmente
+
+	5. SSL
+
+	6. Nunca se conecte como superusuario o como propietario de la base de datos. Siempre utilice usuarios personalizados con privilegios muy limitados.
+Emplee sentencias preparadas con variables vinculadas. Son proporcionadas por PDO, MySQLi y otras bibliotecas.
+Compruebe si la entrada proporcionada tiene el tipo de datos previsto. PHP tiene un amplio rango de funciones para validar la entrada de datos, desde las más simples, encontradas en Funciones de variables y en Funciones del tipo carácter (p.ej., is_numeric(), ctype_digit() respectivamente), hasta el soporte para Expresiones regulares compatibles con Perl.
+Si la expresión espera una entrada numérica, considere verificar los datos con la función ctype_digit(), o silenciosamente cambie su tipo utilizando settype(), o emplee su representación numérica por medio de sprintf().

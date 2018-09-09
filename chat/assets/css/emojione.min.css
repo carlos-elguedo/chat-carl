@@ -1,0 +1,38 @@
+.emojione{
+  font-size:inherit;
+  height:3ex;
+  width:3.1ex;
+  min-height:20px;
+  min-width:20px;
+  display:inline-block;
+  line-height:normal;
+  vertical-align:middle;
+}
+
+figure img.emojione{
+  width: 35px;
+  height: 35px;
+}
+.big-emoticon{
+    width: 55px;
+    height: 55px;
+}
+
+
+/*
+.emo{
+  font-size:inherit;
+  height:4ex;
+  width:4ex;
+  min-height:30px;
+  min-width:30px;
+  display:inline-block;
+  border-radius: 4px;
+  margin: 0px;
+  padding-top: 5px;
+}
+
+img.emojione{
+  width: auto
+}
+*/

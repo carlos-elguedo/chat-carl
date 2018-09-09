@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<meta name="author" content="Carlos Andrés Elguedo"/>    
+	<link rel="stylesheet" href="recursos/css/estilos.css">
+	<title id="titulo-pagina">My Love</title>
+	<script>var lg;</script>
+</head>
+<body>
+	<!-- Division para colocar las respuestas desde el servidor-->
+	<div id="respuestas"></div>
+	<!-- Division para colocar los mensajes de carga-->
+	<div id="mensajes"></div>
+	<!-- Esta division contendra el formulario de nuestra aplicacion-->
+	<div class="contenedor-formulario" style="display:none;">
+		<!-- La division que contiene la pantalla de log in, entrada-->
+		<div class="wrap" id="acceso">
+			<!-- Formulario de inicio de sesión-->
+			<form action="" class="formulario" name="formulario_acceso" id="formulario_acceso">
+				<div>					
+					<!-- Esta division contiene el dato de entrada correo o telefono que ingresara el usuario-->
+					<div class="input-group">
+						<input type="text" id="dato_de_acceso" name="dato_de_acceso">
+						<label class="label" for="dato-de_acceso" id="lab-acceso-nombre" ></label>
+					</div>
+					<!-- Esta division contiene el dato de entrada contraseña que ingresara el usuario-->
+					<div class="input-group">
+						<input type="password" id="pass_acceso" name="pass_acceso">
+						<label class="label" for="pass_acceso" id="lab-acceso-contra"></label>
+					</div>
+					<!-- Aqui esta el boton de entrada a la aplicacion-->
+					<input type="submit" id="btn-submit-inicio-sesion" value="">
+					<!-- Esta division contiene el enlace a ir a recuperar la contraseña-->
+					<div class="input-group opcion">
+						<a href="#">
+							<label class="label" for="olvido" id="lab-acceso-olvido"></label>
+						</a>
+					</div>
+					<br/>
+					<!-- Esta division contiene el enlace a ir a activar la cuenta-->
+					<div class="input-group opcion">
+						<a href="#">
+							<label class="label" for="activacion" id="lab-acceso-activar"></label>
+						</a>
+					</div>
+					<br/><!-- La vieja confiable papu :v-->
+					<br/>
+					<br/>
+					<!-- Esta division estara siempre abajo y es el enlace para registrarse-->
+					<div >
+						<button id="btn-registrarse" class="boton-secundario"></button>
+					</div>
+					
+				<!-- Fin de la division que cntiene las divisiones(campos) del formulario-->
+				</div>
+			<!-- Fin del formulario de inicio de sesion-->
+			</form>
+		<!-- Fin de la division wrap de acceso, inicio de sesion-->
+		</div>
+
+
+<!--Formulario registro-->
+		<div class="wrap" id="registro" style="display:none;">
+			<!-- Formulario de registro para los nuevos usuarios-->
+			<form class="formulario" name="formulario_registro" id="formulario_registro">
+				<!-- Division que contendra los elementos del formulario-->
+				<div>
+					<!--Esta division le dara informacion al usuario para el registro-->					
+					<div class="input-group">
+						<select name="registrar-usando" id="registrar-usando">
+							<option id="registrar-usando-opcion-1" value="0"></option>
+							<option id="registrar-usando-opcion-2" value="1"></option>
+							<option id="registrar-usando-opcion-3" value="2"></option>
+						</select>
+					</div>										
+
+					<!-- Division para pedir el correo electronico del nuevo usuario-->
+					<div class="input-group" id="escogio-correo" style="display:none;">
+						<input type="email" id="correo" name="correo">
+						<label class="label" for="correo" id="lab-registro-correo"></label>
+					</div>
+					
+					<!-- Division que pedira el numero telefono al usuario-->					
+					<div class="input-group" id="escogio-telefono" style="display:none;">
+						<input type="number" id="telefono" name="telefono">
+						<label class="label" for="nombre" id="lab-registro-telefono"></label>
+					</div>
+
+					<!-- Division para pedir el pais desde el cual se esta registrando el usuario-->					
+					<div class="input-group">
+						<select name="pais" id="pais">
+								<!-- Lista de paises aprovados para registrarse-->
+                                <option value="" id="pais-primero"></option>
+                                <option value="Argentina">Argentina</option>
+                                <option value="Bolivia">Bolivia</option>
+                                <option value="Brasil">Brasil</option>
+                                <option value="Chile">Chile</option>
+                                <option value="Colombia">Colombia</option>
+                                <option value="Ecuador">Ecuador</option>
+                                <option value="Paraguay">Paraguay</option>
+                                <option value="Peru">Peru</option>
+                                <option value="Uruguay">Uruguay</option>
+                                <option value="Venezuela">Venezuela</option>
+                        </select>
+					</div>					
+					
+					<!-- Division que pedira la contraseña al usuario-->
+					<div class="input-group">
+						<input type="password" id="pass" name="pass">
+						<label class="label" for="pass" id="lab-registro-contra"></label>
+					</div>
+					<!-- Division que contiene la aceptacion de terminos por parte del usuario-->
+					<div class="input-group checkbox">
+						<input type="checkbox" name="terminos" id="terminos" value="true">
+						<label for="terminos" id="lab-registro-terminos"></label>
+						
+					</div>
+					<!-- Division que contiene un enlacepara que el usuario pueda leer los terminos-->
+					<div class="input-group">
+						<a href="#" target="_black">
+							<label for="" id="lab-registro-leer-terminos"></label>
+						</a>
+					</div>
+					<!-- Boton para enviar los datos del usuario-->
+					<input type="submit" id="btn-submit-registro" value="">
+					<br/><!-- La vieja confiable papu :v-->
+					<br/>
+					<!-- Boton para volver a la pantalla de inicio de sesion-->
+					<button id="btn-salir-registro"class="boton-secundario"></button>
+				<!-- Fin de la division que contiene los elemntos del formulario-->
+				</div>
+			<!-- Fin del formulario de registro-->
+			</form>
+		<!-- Fin de la division de registro, que contiene la pantalla del formulario de registro-->
+		</div>
+
+
+<!-- fORMULARIO DE ACTIVACION NUMERO 1, ESTE SOLO TIENE LA ENTRADAA INGRESAR EL CODIGO style="display:none;"-->
+		<div class="wrap" id="activacion1" style="display:none;">
+			<!-- Formulario de ACTIVACION numero 1, el que viene despues del preregistro -->
+			<form class="formulario" name="formulario_activacion_1" id="formulario_activacion_1">
+				<!-- Division que contendra los elementos del formulario-->
+				<div>
+					<!-- Primer texto de informacion-->
+					<label class="informacion"  id="activacion_info_1_1"></label>						
+					
+					
+					<br/>
+
+					<!-- Segundo texto de informacion-->
+					<label class="informacion" id="activacion_info_2_1"></label>						
+					
+					
+					<!-- Esta division contiene la entrada para el codigo de activacion-->
+					<input type="text" id="activacion_codigo" name="activacion_codigo" placeholder="" class="entrada">
+
+					<!-- Esta division contiene la entrada para el codigo de activacion-->
+					<input type="text" id="dato_usuario_para_activacion" name="dato_usuario_para_activacion" placeholder="" class="entrada"  style="display:none" value="">
+					
+
+					<!-- Aqui esta el boton para el envio del codigo -->
+					<input type="submit" id="btn-submit-enviar-codigo-1" value="">
+
+					<br/><!-- La vieja confiable papu :v-->
+					<br/>
+					<!-- Boton para reenviar el codigo de activacion-->
+					<button id="btn-activacion-reenviar-codigo-1"class="boton-secundario"></button>
+					<br/>
+					<br/>
+					<br/>
+					<!-- Boton para reenviar el codigo de activacion-->
+					<button id="btn-activacion-cancelar-activacion-1"class="boton-secundario"></button>
+
+				
+				<!-- Fin de la division que contiene los elemntos del formulario-->
+				</div>
+			<!-- Fin del formulario de activacion 1-->
+			</form>
+
+		<!-- Fin de la division de activacion numero 1, que contiene la pantalla del formulario de activacion con solo la entrada del codigo-->
+		</div>
+
+<!-- fORMULARIO DE ACTIVACION NUMERO 2, ESTE TIENE LA ENTRADA DEL METODO QUE UTILIZO PARA REGISTRARSE (CORREO O TELEFONO) Y COMPROBARA ESTE DATO ENVIANDOLO AL SERVIDOR PARA SEGUIR ADELANTE style="display:none;"-->
+		<div class="wrap" id="activacion2" style="display:none;">
+			<!-- Formulario de ACTIVACION numero 1, el que viene despues del preregistro -->
+			<form class="formulario" name="formulario_activacion_2" id="formulario_activacion_2">
+				<!-- Division que contendra los elementos del formulario-->
+				<div>
+					<!-- Primer texto de informacion-->
+					<label class="informacion"  id="activacion_info_1_2"></label>						
+					
+					<br/>
+
+					<!-- Segundo texto de informacion-->
+					<label class="informacion" id="activacion_info_2_2"></label>						
+					
+					<br/>
+
+					<!-- Tercer texto de informacion-->
+					<label class="informacion" id="activacion_info_3_2"></label>
+					
+					
+					<!-- Esta division contiene la entrada para el codigo de activacion-->
+					<input type="text" id="activacion_forma_que_uso" name="activacion_forma_que_uso" placeholder="" class="entrada">
+					
+
+					<!-- Aqui esta el boton para el envio del codigo -->
+					<input type="submit" id="btn-submit-enviar-forma-activacion-2" value="">
+
+					<br/><!-- La vieja confiable papu :v-->
+					<br/>
+					<br/>
+					
+					<!-- Boton para reenviar el codigo de activacion-->
+					<button id="btn-activacion-cancelar-activacion-2"class="boton-secundario"></button>
+
+				
+				<!-- Fin de la division que contiene los elemntos del formulario-->
+				</div>
+			<!-- Fin del formulario de activacion 1-->
+			</form>
+
+		<!-- Fin de la division de activacion numero 1, que contiene la pantalla del formulario de activacion con solo la entrada del codigo-->
+		</div>
+
+	
+	
+	<!-- Fin del contenedor de formulario-->
+	</div>
+
+	<!-- Division que tendra la bienvenida para cuando se ejecute por primera vez la aplicacion -->
+	<div class="primera-vez centrado" style="display:none;">
+		<h2>Primera vez xd</h2>
+		<br>
+		<h4>Poner una imagen de bienvenida aqui lo que sea que se yo</h4>
+		<br><br>
+		<button id="cerrar-primera-vez" class="boton-aceptar-cancelar">ingresar a MyLove</button>
+	<!-- Fin del div que contiene la primera vez que se ejecuta la app -->
+	</div>
+
+
+	<!-- Archivos javascrips para controlar el funcionamiento de la app-->
+	<script src= "recursos/js/jquery-3.1.1.min.js"></script>
+	<script src= "recursos/js/lib/idioma.js"></script>
+	<script src= "recursos/js/control.js"></script>
+	<script src= "recursos/js/formulario.js"></script>			
+	
+
+
+<!-- Fin del body-->
+</body>
+</html>

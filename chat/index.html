@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html >
+  <head>
+    <meta charset="UTF-8">
+    <title id="titulo-pagina">Chat</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+
+    
+    
+    <link rel='stylesheet prefetch' href='MaterialDesign/css/materialdesignicons.min.css'>
+
+    <link rel="stylesheet" href="assets/css/animate.css"/>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/emojione.min.css" type="text/css" media="all" />
+    <link rel="stylesheet" href="assets/css/precargando.css" type="text/css" media="screen, print"/>
+    
+    
+    <script src="assets/js/emojione.min.js"></script>
+    <script type="text/javascript">
+        // #################################################
+        // # Optional
+
+        // default is PNG but you may also use SVG
+        //emojione.imageType = 'svg';
+        emojione.imageType = 'png';
+
+        // default is ignore ASCII smileys like :) but you can easily turn them on
+        emojione.ascii = true;
+
+        // if you want to host the images somewhere else
+        // you can easily change the default paths
+        emojione.imagePathPNG = 'assets/img/emo/png/';
+        emojione.imagePathSVG = 'assets/img/emo/svg/';
+        
+
+        // #################################################
+    </script>
+
+
+  </head>
+  <body>
+
+          <!-- Preloader -->
+          <div id="preloader">
+            <div id="status">&nbsp;</div>
+          </div>
+
+
+      <style id="dynamic-styles"></style>
+      <div id="hangout">
+        <div id="head" class="style-bg">
+          
+          <i class="mdi mdi-arrow-left"></i>
+          <i class="mdi mdi-fullscreen-exit"></i>
+          <i class="mdi mdi-menu"></i>
+          <div id="barraSuperiorTexto">
+            <h1 id="nombre-usuario-chat" class="nombre-usuario"></h3>
+            <p id="estado_superior"></p>
+          </div>
+          <img id="img-otro" class="img-superior chat-superior" src="assets/img/index.png" />
+          <ul class="dropdown-menu" role="menu">
+              <li><label>Ver perfil</label></li>
+              <li><label>Ver perfil</label></li>
+              <li><label>Ver perfil</label></li>
+              <li><label>Ver perfil</label></li>
+              <li><label>Ver perfil</label></li>
+              <li id="cerrarMenuOtro"><label> Salir</label></li>
+          </ul>
+
+          <i id="mas-opciones" class="mdi mdi-plus chat-superior"></i>
+          <i class="mdi mdi-chevron-down"></i>
+          
+        </div>
+        
+        <div id="content">
+          
+
+          <div class="overlay"></div>
+          <div id="respuestas-servidor" class="center"></div>
+          <div id="informaciones-configaraciones" class="center"><label></label></div>
+          <div id="informaciones" class="center"></div>
+          <div id="informaciones-mensajes" class="center"></div>
+
+
+          <div id="floater-position">
+            <div id="add-contact-floater" class="floater control style-bg hidden">
+              <i class="mdi mdi-plus"></i>
+            </div>          
+            <div id="chat-floater" class="floater control style-bg hidden">
+              <i class="mdi mdi-comment-text-outline"></i>
+            </div>
+          </div><!-- Fin del div floater position-->
+    
+    
+          <div id="menuLateral" class="card menu">
+            <div class="header ir-perfil boton">
+              <img class="img-usuario" src="assets/img/index.png" />
+              <h3 class="nombre-usuario"></h3>
+            </div>
+          <div id="opcionesMenuLateral" class="content">
+            <!--
+            <div class="i-group">
+              <input type="text" id="username"><span class="bar"></span>
+              <label>Name</label>
+            </div>        
+            -->
+            
+            <div class="center">
+              <!--<canvas id="colorpick" width="250" height="220" ></canvas>-->
+              
+              <ul class="mat-ripple" id="opcionesLaterales">      
+                
+                <li id="opcion_1">
+                  <i id="barra-opc-1" class="mdi"></i>
+                </li>
+                
+                <li id="opcion_2">
+                  <i id="barra-opc-2" class="mdi"></i>
+                </li>
+                
+                <li id="opcion_3">
+                  <i id="barra-opc-3" class="mdi"></i>
+                </li>
+                
+                <li id="opcion_4">
+                  <i id="barra-opc-4" class="mdi"></i>
+                </li>
+
+              </ul>
+
+            </div>
+          </div>
+        </div><!-- Fin del div menu card-->
+
+
+
+
+        <div class="list-account">
+          <div class="meta-bar">
+            <input class="nostyle search-filter" type="text" placeholder="Search" />
+          </div>
+          <ul class="list mat-ripple">      
+            
+          </ul>
+
+        </div><!-- Fin del div list count-->
+
+
+        <div class="list-text">
+          <div id="noticias">
+          <!--<section id="reproductor">
+            <video id="medio" controls>
+              <source src="assets/video/video1.mp4">
+            </video>
+          </section>-->          
+          </div>
+
+
+
+          <ul id="chats" class="list mat-ripple">
+            <!--Enlace a los chats -->
+          </ul> 
+        </div><!-- Fin del div list text-->
+
+
+
+
+        <div class="list-phone">
+          <div class="meta-bar">
+            <input class="nostyle search-filter" type="text" placeholder="Name, phone number" />
+          </div>
+
+          <ul class="list mat-ripple center">
+          <img src="assets/img/trayendo.gif">
+            <!-- Lista de llamadas -->
+          </ul> 
+        </div><!-- Fin del div lista phones-->
+
+
+
+        <div id="pantalla_chat" class="list-chat" style="display: none;">
+
+              <!--  CUERPO DE LOS MENSAJES -->
+              <!-- ***************************************************************************************** -->
+              
+              <!-- Bien, aqui ponemos las divisiones donde se almacenaran los respectivos mensajes del usuario, son en total 8 divisiones-->
+              <div id="mensajes_mylove"  style="display: none;"></div>
+              <div id="mensajes_friendzone_1"  style="display: none;"></div>
+              <div id="mensajes_friendzone_2"  style="display: none;"></div>
+              <div id="mensajes_friendzone_3"  style="display: none;"></div>
+              <div id="mensajes_friendzone_4"  style="display: none;"></div>
+              <div id="mensajes_friendzone_5"  style="display: none;"></div>
+              <div id="mensajes_friendzone_6"  style="display: none;"></div>
+              <div id="mensajes_friendzone_7"  style="display: none;"></div>
+
+              <!-- ***************************************************************************************** -->
+              <!--  CUERPO DE LOS MENSAJES -->
+
+        </div><!-- Fin del div chat -->
+
+
+
+
+
+
+
+
+
+        <ul id="opciones-principales" class="nav control mat-ripple tiny">
+      
+      <li data-route=".list-account"><i id="pantalla_1" class="mdi mdi-account-multiple"></i><label id="num_notificaciones"></label></li><li data-route=".list-text"><i id="pantalla_2" class="mdi mdi-comment-text"></i><label id="num_mensajes"></label></li><li data-route=".list-phone"><i id="pantalla_3" class="mdi mdi-phone"></i><label id="num_juegos"></label></li></ul>
+
+
+      <!-- Opciones de la barra lateral -->
+      <div class="mylove" id="opc_mylove" style="display:none;">
+          <div>
+            <h2 class="center">Titulo 1</h2>
+            <h3>Titulo 3</h3>
+            <p>Hola Hola Hola Hola Hola Hola Hola Hola </p>
+          </div>
+      </div>
+
+
+
+
+
+
+      <div class="cuenta" id="opc_cuenta" style="display:none;">
+
+            <br/>
+            <div class="center">
+              <img id="IMAGEN-PERFIL-OPC" class="img-perfil-opc img-usuario" src="assets/img/index.png">
+              <br/>
+              <button id="cambiar-foto-perfil" class="boton-peque"></button>
+            </div>
+            <br/>
+
+            <div>
+              
+              <div class="i-group center">
+                <div class="center">
+                  <input type="text" id="username" class="center nombre-usuario"><span class="bar"></span>
+                </div>
+              </div>        
+            </div>
+
+            <div>
+              <ul class="mat-ripple opc">      
+                
+                <li>
+                  <i id="cuenta-opc-1" class="opc-opc"></i>
+                </li>
+                <li>
+                  <i id="cuenta-opc-2" class="opc-opc"></i>
+                </li>
+                <li>
+                  <i id="cuenta-opc-3" class="opc-opc"></i>
+                </li>
+                <li>
+                  <i id="cuenta-opc-4" class="opc-opc cerrar-sesion"></i>
+                </li>
+
+              </ul>
+            </div>
+
+            <div id="img-perfil-vista-subida" style="display:none;" class="center card teatro">
+              <form id ='form_img' method = '' enctype = 'multipart/form-data'>
+                <label class="texto-b">Selecciona una imagen para subir</label>
+                <br>
+                <input type='hidden' name='MAX_FILE_SIZE' value='1000000' />
+                <input type='file' accept='image/*' value='' id='img-perfil-subida' name='img'>
+                <br><br>
+                <button id="subirImagenPerfil" class="boton-peque">Subir</button>
+                <br>
+              </form>
+              <br>
+              <picture>
+                <img id = "img-subida-pre" src="assets/img/index.png" alt="cargando...">
+              </picture>  
+              <div class="foto-inferior">
+                <br>
+                <label id="cancelar-proceso-3" style="color:white;"></label>
+                <br>
+                <img id="subiendo-img-perfil" src="assets/img/cargando.gif" style="display:none;">
+              </div>
+          </div>
+            </div>
+
+      </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      <div class="configuraciones" id="opc_configuraciones" style="display:none;">
+          <div>
+            <h2 class="center" id="opc-titulo-config"></h2>
+            <p id="opc-descrip-config"></p>
+          </div>
+          <div>
+            <ul class="mat-ripple opc">      
+                
+                <li>
+                  <i id="opc-conf-opc-1" class="opc-opc"></i>
+                </li>
+                <li>
+                  <i id="opc-conf-opc-2" class="opc-opc"></i>
+                </li>
+                <li>
+                  <i id="opc-conf-opc-3" class="opc-opc"></i>
+                </li>
+                <li>
+                  <i id="opc-conf-opc-4" class="opc-opc"></i>
+                </li>
+                <li>
+                  <i id="opc-conf-opc-5" class="opc-opc"></i>
+                </li>
+                <li>
+                  <i id="opc-conf-opc-6" class="opc-opc"></i>
+                </li>
+
+
+              </ul>
+          </div>
+      </div>
+
+      <div class="acerca" id="opc_acerca" style="display:none;">
+          <div>
+            <h2 class="center">Titulo 4</h2>
+            <h3>Titulo 4</h3>
+            <p>Hola Hola Hola Hola Hola Hola Hola Hola </p>
+          </div>
+      </div>
+
+
+
+
+      </div><!-- Fin del div CONTENT PRICIPAL-->
+  
+      <div id="footer" style="display:none;">
+          <div id="mensajeT0" class="opciones-de-mensajes" style="display:none;">
+              <ul class="lista-de-mensajes">
+                  <li data-route="#texto">
+                      <i class="mdi mdi-plus"></i>
+                  </li>
+                  <li>
+                      <i class="mdi mdi-plus"></i>
+                  </li>
+                  <li>
+                      <i class="mdi mdi-plus"></i>
+                  </li>
+                  <li>
+                      <i class="mdi mdi-plus"></i>
+                  </li>
+                  <li>
+                      <i class="mdi mdi-plus"></i>
+                  </li>
+
+              </ul>
+
+          </div>
+          <div style="clear:both;"></div>
+          <div id="texto">
+            <div id="mensajeT1" class="boton-chat-texto-izq enlinea">
+                <div class="boton-chat-texto-emo-tex control style-bg">
+                    <i class="mdi mdi-emoticon-excited  boton" id="boton-cambiar-emo-txt"></i>
+                </div>
+            </div>
+                  
+            <div id="mensajeT2"  class="enlinea">
+                <div id ="area_de_texto" contentEditable="true"></div>
+            </div>
+                  
+            <div id="mensajeT3" class="boton-chat-texto-der enlinea">
+                <div class="boton-chat-texto-enviar control style-bg">
+                    <i id="ENVIAR" class="mdi mdi-heart boton"></i>
+                </div>
+            </div>
+            <div id="mensajeT4" class="emoticones style-bg center emoticones" style="display:none;">
+              
+              <input id="emo1" type="radio" name="tabs" checked>
+              <label for="emo1"><i class="mdi mdi-emoticon-happy"></i></label>
+              
+              <input id="emo2" type="radio" name="tabs"/>
+              <label for="emo2"><i class="mdi mdi-cat"></i></label>
+                
+              <input id="emo3" type="radio" name="tabs"/>
+              <label for="emo3"><i class="mdi mdi-heart-outline"></i></label>
+
+              <input id="emo4" type="radio" name="tabs"/>
+              <label for="emo4"><i class="mdi mdi-food"></i></label>
+              
+              <input id="emo5" type="radio" name="tabs"/>
+              <label for="emo5"><i class="mdi mdi-soccer"></i></label>
+              
+              <input id="emo6" type="radio" name="tabs"/>
+              <label for="emo6"><i class="mdi mdi-home-outline"></i></label>
+              
+              <input id="emo7" type="radio" name="tabs"/>
+              <label for="emo7"><i class="mdi mdi-cellphone-link"></i></label>
+              
+              <input id="emo8" type="radio" name="tabs"/>
+              <label for="emo8"><i class="mdi mdi-face"></i></label>
+
+              <input id="emo9" type="radio">
+              <label ><i id="eliminar-emoticon" class="mdi mdi-step-backward-2"></i></label>
+
+              <section id="emos1">emo 1</section>
+              <section id="emos2">emo 2</section>
+              <section id="emos3">emo 3</section>
+              <section id="emos4">emo 4</section>
+              <section id="emos5">emo 5</section>
+              <section id="emos6">emo 6</section>
+              <section id="emos7">emo 7</section>
+              <section id="emos8">
+                  <input id="color1" type="radio" name="tabs-tono" checked>
+                  <label for="color1"><i class="mdi mdi-emoticon-happy"></i></label>
+              
+                  <input id="color2" type="radio" name="tabs-tono"/>
+                  <label for="color2"><i class="mdi mdi-cat"></i></label>
+                
+                  <input id="color3" type="radio" name="tabs-tono"/>
+                  <label for="color3"><i class="mdi mdi-heart-outline"></i></label>
+
+                  <input id="color4" type="radio" name="tabs-tono"/>
+                  <label for="color4"><i class="mdi mdi-food"></i></label>
+              
+                  <input id="color5" type="radio" name="tabs-tono"/>
+                  <label for="color5"><i class="mdi mdi-soccer"></i></label>
+
+                  <input id="color6" type="radio" name="tabs-tono"/>
+                  <label for="color6"><i class="mdi mdi-soccer"></i></label>
+
+                  <section id="colors1">color 1</section>
+                  <section id="colors2">color 2</section>
+                  <section id="colors3">color 3</section>
+                  <section id="colors4">color 4</section>
+                  <section id="colors5">color 5</section>
+                  <section id="colors6">color 6</section>
+
+              </section>
+
+            </div>
+
+
+          </div>
+        </div>
+
+
+
+      <div id="contact-modal" data-mode="add" class="card dialog">
+          <h3 id="lab-solicitud-titulo"></h3>
+        <div class="i-group">
+            <p id="lab-solicitud-descripcion"></p>
+            <select id="solicitud-tipo-dato">
+                <option id="envsolval1" value="1"></option>
+                <option id="envsolval2" value="2"></option>
+                <option id="envsolval3" value="3"></option>
+            </select>
+            <input id="correo-solicitud" class="dato-solicitud" type="text" placeholder="ejemplo@ejemplo.com">
+            <input id="telefono-solicitud" class="dato-solicitud" type="number" placeholder="3002222333 o +573002222333" style="display: none;">
+            <input id="codigo-solicitud" class="dato-solicitud" type="text" placeholder="a11aa" style="display: none;">
+        </div>
+          <br/>
+        <div class="btn-container">
+          <span id="envsolbotcancel" class="btn cancel"></span>
+          <span id="envsolbotenviar" class="btn save"></span>      
+        </div>
+      
+      </div>
+
+
+
+
+
+
+
+
+
+
+  
+      <div id="detalles-su-mensaje" class="card dialog">
+          <h3>Detalles del mensaje</h3>
+          <h3>Reenviar mensaje</h3>
+          <h3>Eliminar</h3>
+          <div class="btn-container">
+                <span id="cancelar-proceso-1" class="btn cancel"></span>
+          </div>
+          <br/>
+      </div>
+
+
+
+      <div id="enviando-datos" class="card dialog center">
+          <br>
+          <img id="img-enviando-datos" src="assets/img/trayendo.gif">
+          <br>
+          <div id="accion-solicitud-respuesta">
+            <!-- En estadivision iran las respuesta a las acciones que el usuario hace sobre las solicitudes -->
+          </div>
+          <div class="btn-container">
+                <span id="cancelar-proceso-2" class="btn cancel"></span>
+          </div>
+          <br/>
+      </div>
+
+
+      <div id="alerta" class="card dialog center">
+          <br>
+          <img id="img-enviando-datos" src="assets/img/alerta.png" width="100" height="100">
+          <br>
+          <div id="accion-solicitud-respuesta">
+            <label id="solicitud-enviada-escoger-accion"></label>
+          </div>
+          <div class="btn-container">
+                <span id="aceptar-alerta" class="btn cancel"></span>
+          </div>
+          <br/>
+      </div>
+
+
+
+
+      <div id="foto" class="card teatro">
+          <div>
+            <div class="foto-superior">
+              <i class="mdi mdi-close-circle-outline" style="color:white; font-size:20px;"></i>
+              <label style="color:white;">Cerrar</label>
+            </div>
+            <picture>
+              <img id = "img-teatro" class="img-usuario" src="assets/img/index.png" alt="cargando...">
+            </picture>  
+            <div class="foto-inferior">
+              <label>Siguiente</label>
+              <label>Anterior</label>
+            </div>
+          </div>
+      </div>
+
+
+    </div><!-- Fin del div PRIMERO HANGUT-->
+    <div id="audios">
+      <audio id="notificacion-audio" preload="auto">
+        <source  src="assets/audio/notificacion.mp3" type="audio/mp3">
+        <source  src="assets/audio/notificacion.ogg" type="audio/ogg">
+      </audio>
+      <audio id="solicitud-audio" preload="auto">
+        <source  src="assets/audio/solicitud.mp3" type="audio/mp3">
+        <source  src="assets/audio/solicitud.ogg" type="audio/ogg">
+      </audio>
+      <audio id="nuevo-mensaje-audio" preload="auto">
+        <source  src="assets/audio/nuevo_mensaje.mp3" type="audio/mp3">
+        <source  src="assets/audio/nuevo_mensaje.ogg" type="audio/ogg">
+      </audio>
+    </div>
+
+
+
+
+    <script src='assets/js/jquery-3.1.1.min.js'></script>
+    <script src="assets/js/socket.io/socket.io.min.js"></script>
+    <script src="assets/js/idiomas/idiomas.js"></script>
+    <script src="assets/js/funciones.js"></script>
+    
+    <script src="assets/js/variables.js"></script>
+    <script src="assets/js/conexionphp.js"></script>
+    <!--<script src="assets/js/conexion.js"></script>-->
+
+    <script src="assets/js/configuraciones/configphp.js"></script>
+
+    <script src="assets/js/mensajes/eventos.js"></script>
+    <script src="assets/js/mensajes/bandejaMensajes.js"></script>
+    <script src="assets/js/mensajes/mensajes.js"></script>
+    <script src="assets/js/mensajes/chat.js"></script>
+
+    <script src="assets/js/solicitudes/eventos.js"></script>
+    <script src="assets/js/solicitudes/solicitudes.js"></script>
+    <script src="assets/js/solicitudes/acciones.js"></script>
+    
+
+    <script src="assets/js/index.js"></script>
+    <script src="assets/js/control.js"></script>
+    <script src="assets/js/opciones_barra_lateral.js"></script>
+    <script src="assets/js/emoticones.js"></script>
+    
+
+    <script type="text/javascript">
+      
+      function quitarCarga(){
+        $('#status').fadeOut(); // will first fade out the loading animation
+        $('#preloader').delay(350).fadeOut('slow'); // will fade out the white DIV that covers the website.
+      }
+
+      window.onload=quitarCarga;
+      
+
+    </script>
+    <div id="eventos-servidor"></div>
+    <div id="eventos"></div>
+    <div id="eventos-escribiendo"></div>
+    
+    <div id="envio-mensajes"></div>
+    <div id="eventos-mensajes-recibe"></div>
+    <div id="eventos-mensajes-entregados"></div>
+
+  </body>
+</html>
